@@ -9,12 +9,13 @@ exports.setup = function(Map) {
 					const w = me.w;
 					const h = me.h;
 					
-					const src = (me.cnt)&1;
-					const dst = (++me.cnt)&1;
+					const src = me.buffer[(me.cnt)&1];
+					const dst = me.buffer[(++me.cnt)&1];
 					
 					for(var i=0; i<h; i++) {
 						for(var j=0; j<w; j++) {
-							me.buffer[dst].setPixelColor(me.buffer[src].getPixelColor((j+x)%w,(i+y)%h),j,i);
+							const addr = i*w+j;
+							dst[addr] = src[((i+y)%h)*w+((j+x)%w)];
 						}
 					}
 					

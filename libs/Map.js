@@ -1,4 +1,3 @@
-const Jimp = require("jimp");
 const Map = {
 	composite:(y,z)=>(x)=>y(z(x)),
 	$:(function(){}),
@@ -8,13 +7,17 @@ const Map = {
 			w:w,
 			h:h,
 			cnt:0,
-			buffer:[new Jimp(w,h),new Jimp(w,h)]
+			buffer:[new Uint32Array(w*h),new Uint32Array(w*h)]
 		};
 	}
 };
 
-
 const Generator = require("./Generator").setup(Map);
 exports.src = Generator.src;
+exports.noise = Generator.noise;
+
 require("./Transform").setup(Map);
 require("./Exporter").setup(Map);
+
+const Operator = require("./Operator").setup(Map);
+exports.mix = Operator.mix;
