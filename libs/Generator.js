@@ -36,6 +36,7 @@ exports.setup = function(Map) {
 					const pixels = me.buffer[me.cnt];
 					for(var i=0; i<h; i++) {
 						for(var j=0; j<w; j++) {
+							const addr = i*w+j;
 							const x = 0x5555+(((Math.random()*w)>>0)<<3);
 							const y = 0x5555+(((Math.random()*h)>>0)<<3);
 							pixels[addr] = (x<<16|y)>>>0;
